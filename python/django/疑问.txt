@@ -1,0 +1,37 @@
+下面的有些问题有答案   有些没有解答
+
+1. include分页和tag return html 什么情况下该用哪个?
+    他们很相似, 比如分页既可以用include tag也可以用inclusion tag实现
+
+答案: https://stackoverflow.com/a/14218982/11479544
+What is the difference between Django's built-in include tag and custom inclusion tags?
+
+主要是inclusion tag可以执行逻辑来返回上下文
+分页应该用include tag, 因为传递的上下文时固定的
+
+
+2. 再用python来定义一遍数据库中的模型是不是多余的?
+(数据库中有表了, 再写一遍models.py多余吗)
+
+答案:
+    为了提供方便数据访问的API, 需要内省数据库, 需要一定的 开销
+    将数据库存储为代码, 可以进行版本控制, 轻松跟踪数据布局更改
+    跨数据库平台提供一致性
+
+
+3.  urls.py的app_name和include的可选参数namespace区别?
+    暂无答案
+
+
+4.  登陆的时候next?(这是django3 by example中的例子,
+怎么使用这个next和怎么传这个next没懂)
+<input type="hidden" name="next" value="{{ next }}" />(这是放在login form中)
+    暂无答案
+
+
+5. admin的设置是如何做到的?
+    暂无答案
+
+
+6. gettext_lazy和gettext()的区别?
+

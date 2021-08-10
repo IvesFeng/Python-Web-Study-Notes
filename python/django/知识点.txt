@@ -1,0 +1,70 @@
+1. 两种方式自定义manager的方式:
+    manager中添加方法
+    新添加一个manager
+There are two ways to add or customize managers for your models:
+you can add extra manager methods to an existing manager,
+or create a new manager by modifying the initial QuerySet that the manager returns.
+The first method provides you with a QuerySet API such as Post.objects.my_manager(),
+and the latter provides you with Post.my_manager.all().
+The manager will allow you to retrieve posts using Post.published.all().
+    --《django 3 by example》
+    
+
+2. widget和field类的主要区别
+Think of the Field classes as representing validation logic,
+while widgets represent presentation logic.
+因为展示逻辑在widget中, 所以js和css是放在widget中的
+
+
+3. 简要备注自定义lookup中的lhs和rhs分别代表什么
+自定义lookup
+from django.db.models import Lookup, Field
+
+@Field.register_lookup
+class NotEqual(Lookup):
+    lookup_name = 'ne'
+
+    def as_sql(self, compiler, connection):
+        lhs, lhs_params = self.process_lhs(compiler, connection)  # "blog_post"."title" []
+        rhs, rhs_params = self.process_rhs(compiler, connection)  # %s ['Who was Django Reinhardt?']
+        params = lhs_params + rhs_params
+        return '%s = %s' % (lhs, rhs), params
+
+Post.objects.filter(title__ne='Who was Django Reinhardt?')
+
+
+4. 自定义字段的主要方法记录
+自定义Field: https://docs.djangoproject.com/en/3.1/howto/custom-model-fields/
+__init__方法:
+    
+deconstruct方法:
+    It’s used during model migrations to tell Django how to take an instance of
+    your new field and reduce it to a serialized form - in particular,
+    what arguments to pass to __init__() to re-create it.
+
+deconstruct() must return arguments that you can pass to __init__ to reconstruct that state.
+
+db_type 方法
+
+from_db_value方法
+
+to_python方法
+
+get_db_prep_save()方法: Converting query values to database values
+
+
+5. 模板渲染过程
+from django.template import loader
+template = loader.get_template('polls/index.html')
+HttpResponse(template.render(context, request))
+改成render后多需要一个request参数, 为什么?
+
+
+6. django处理request的过程
+https://docs.djangoproject.com/en/3.1/topics/http/urls/#how-django-processes-a-request
+
+
+7. https://docs.djangoproject.com/en/3.1/ref/applications/
+
+
+
