@@ -67,4 +67,14 @@ https://docs.djangoproject.com/en/3.1/topics/http/urls/#how-django-processes-a-r
 7. https://docs.djangoproject.com/en/3.1/ref/applications/
 
 
+8. 自定义模板tag
+simple_tag 处理数据返回字符 inclusion_tag 处理数据返回模板
+The power of custom template tags is that you can process any data and
+add it to any template regardless of the view executed.
+You can perform QuerySets or process any data to display results in your templates.
 
+
+9. 模板里for循环判断为空可以用{% empty %}
+{% for comment in comments %}
+{% empty %}
+{% endfor %}
